@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑白画境 - Yong画师作品集</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#333333',
+                        accent: '#4B5563',
+                        highlight: '#6B7280',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .metal-button {
+                background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+                border: 1px solid #444;
+                box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -1px -1px 2px rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            .metal-button:hover {
+                box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+            .metal-button:active {
+                box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4), inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+                transform: translateY(0);
+            }
+            .status-indicator {
+                position: relative;
+                overflow: hidden;
+            }
+            .status-indicator::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #6B7280, transparent);
+                animation: scanline 2s infinite;
+            }
+            @keyframes scanline {
+                0% { left: -100%; }
+                100% { left: 100%; }
+            }
+            .masonry-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                grid-gap: 20px;
+                grid-auto-flow: dense;
+            }
+            .masonry-item {
+                break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .masonry-item:hover img {
+                filter: grayscale(0%);
+            }
+            .masonry-item img {
+                filter: grayscale(100%);
+                transition: filter 0.5s ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 w-full bg-white bg-opacity-90 backdrop-blur-md z-50 shadow-md status-indicator">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-primary">黑白画境</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-primary transition-all-300">首页</a>
+                <a href="#about" class="text-gray-700 hover:text-primary transition-all-300">关于我</a>
+                <a href="#works" class="text-gray-700 hover:text-primary transition-all-300">作品集</a>
+                <a href="#drafts" class="text-gray-700 hover:text-primary transition-all-300">初稿</a>
+                <a href="#videos" class="text-gray-700 hover:text-primary transition-all-300">视频</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary transition-all-300">留言</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="text-gray-700 hover:text-primary py-2 transition-all-300">首页</a>
+                <a href="#about" class="text-gray-700 hover:text-primary py-2 transition-all-300">关于我</a>
+                <a href="#works" class="text-gray-700 hover:text-primary py-2 transition-all-300">作品集</a>
+                <a href="#drafts" class="text-gray-700 hover:text-primary py-2 transition-all-300">初稿</a>
+                <a href="#videos" class="text-gray-700 hover:text-primary py-2 transition-all-300">视频</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary py-2 transition-all-300">留言</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页/英雄区 -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-100 to-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-primary">黑白画境</h1>
+                    <p class="text-xl md:text-2xl text-gray-700 mb-6">用铅笔勾勒世界，以黑白诠释创意</p>
+                    <p class="text-gray-600 mb-8">我是一名热爱绘画的男孩，专注于黑白铅笔画和简笔画创作。欢迎来到我的艺术世界！</p>
+                    <div class="flex space-x-4">
+                        <a href="#works" class="metal-button px-6 py-3 rounded-lg text-white font-medium">
+                            查看作品
+                        </a>
+                        <a href="#about" class="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-200 transition-all-300">
+                            了解更多
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1000">
+                    <img src="https://p11-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ba6442be083e45ecb73d42840574e782~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020231&x-signature=VLfeHxVa5AnFgo6JDnJtCRmrPKQ%3D" 
+                         alt="画师形象" 
+                         class="w-64 h-64 object-cover rounded-full shadow-xl border-4 border-white">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">关于我</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-gray-700 mb-4">大家好，我是一名从小就喜欢画画的小画师。我特别热衷于黑白铅笔画和简笔画，因为我觉得黑白两色能够最直接地表达物体的形态和质感。</p>
+                    <p class="text-gray-700 mb-4">我的创作灵感主要来源于科幻电影、动漫和日常生活中的观察。我喜欢画僵尸、变形金刚、机器人等充满想象力的主题，也会尝试一些抽象的数字和几何图形组合。</p>
+                    <p class="text-gray-700 mb-4">通过这个网站，我希望能与更多志同道合的朋友分享我的作品，也期待能得到大家的建议和鼓励，一起进步！</p>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4">我的绘画工具</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">2B铅笔</span>
+                            <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">HB铅笔</span>
+                            <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">4B铅笔</span>
+                            <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">素描纸</span>
+                            <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">橡皮</span>
+                            <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">美工刀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section id="works" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up">作品集</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                这里展示了我的黑白绘画作品，包括铅笔画和简笔画。点击作品可以查看大图和详情。
+            </p>
+            
+            <!-- 作品分类标签 -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="200">
+                <button class="category-filter active px-4 py-2 rounded-full bg-primary text-white metal-button" data-category="all">
+                    全部
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all-300" data-category="zombie">
+                    僵尸
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all-300" data-category="robot">
+                    机器人
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all-300" data-category="abstract">
+                    抽象
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all-300" data-category="city">
+                    城市
+                </button>
+            </div>
+            
+            <!-- 作品瀑布流 -->
+            <div class="masonry-grid">
+                <!-- 作品1 -->
+                <div class="masonry-item hover-scale" data-category="zombie" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3cb06a1cdb5f4764b720d0831a7241e4~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020166&x-signature=dcwlkFiMiJNOeOkLqRrmPJC%2FyI0%3D" 
+                             alt="僵尸头像" 
+                             class="w-full h-auto cursor-pointer work-image" 
+                             data-id="1">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">僵尸头像</h3>
+                            <p class="text-gray-600 text-sm mb-3">铅笔画 | 2023年作品</p>
+                            <button class="view-details px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all-300 text-sm" data-id="1">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品2 -->
+                <div class="masonry-item hover-scale" data-category="abstract" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/905d8e828a754683b42ce0421c83f42c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020173&x-signature=1MqHIcUJeDy3LQk8NCjcTs%2Fq7%2BU%3D" 
+                             alt="数字方块" 
+                             class="w-full h-auto cursor-pointer work-image" 
+                             data-id="2">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">数字方块</h3>
+                            <p class="text-gray-600 text-sm mb-3">简笔画 | 2023年作品</p>
+                            <button class="view-details px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all-300 text-sm" data-id="2">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品3 -->
+                <div class="masonry-item hover-scale" data-category="robot" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/28b7c4a8a0c94522b8f671ba3c61824e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020164&x-signature=oFprc%2BVxBX%2F1yZgmg65XRUNSkb0%3D" 
+                             alt="变形金刚" 
+                             class="w-full h-auto cursor-pointer work-image" 
+                             data-id="3">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">变形金刚</h3>
+                            <p class="text-gray-600 text-sm mb-3">铅笔画 | 2023年作品</p>
+                            <button class="view-details px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all-300 text-sm" data-id="3">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品4 -->
+                <div class="masonry-item hover-scale" data-category="city" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/8076978390b54135a14e2c5094036bf5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020169&x-signature=bW2Xoo8jHKyae56tmN%2Fkn3WqJ7g%3D" 
+                             alt="科幻城市" 
+                             class="w-full h-auto cursor-pointer work-image" 
+                             data-id="4">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">科幻城市</h3>
+                            <p class="text-gray-600 text-sm mb-3">简笔画 | 2023年作品</p>
+                            <button class="view-details px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all-300 text-sm" data-id="4">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品5 -->
+                <div class="masonry-item hover-scale" data-category="zombie" data-aos="fade-up" data-aos-delay="500">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/bcb19d26fd8f41bea2209c72e0fc9c61~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020167&x-signature=71fmXHUleHLerQEUMBEjJkXe7MA%3D" 
+                             alt="骷髅头" 
+                             class="w-full h-auto cursor-pointer work-image" 
+                             data-id="5">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">骷髅头</h3>
+                            <p class="text-gray-600 text-sm mb-3">铅笔画 | 2023年作品</p>
+                            <button class="view-details px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all-300 text-sm" data-id="5">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品6 -->
+                <div class="masonry-item hover-scale" data-category="robot" data-aos="fade-up" data-aos-delay="600">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/2fe92b12ad75466b92e0124df070b457~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020164&x-signature=JB3Wm2AaRvEbUh1vWhZWTj8rgY4%3D" 
+                             alt="机器人手" 
+                             class="w-full h-auto cursor-pointer work-image" 
+                             data-id="6">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">机器人手</h3>
+                            <p class="text-gray-600 text-sm mb-3">简笔画 | 2023年作品</p>
+                            <button class="view-details px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all-300 text-sm" data-id="6">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 初稿板块 -->
+    <section id="drafts" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up">初稿与创作过程</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                这里展示了我的一些初稿和创作过程，记录了从构思到完成的每一步。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 初稿1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">僵尸头像创作过程</h3>
+                        <p class="text-gray-600 mb-4">这个作品从构思到完成用了大约3个小时。我先画出基本轮廓，然后逐步添加细节和阴影。</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">构思</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">草图</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">细节</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">阴影</span>
+                        </div>
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3cb06a1cdb5f4764b720d0831a7241e4~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020166&x-signature=dcwlkFiMiJNOeOkLqRrmPJC%2FyI0%3D" 
+                             alt="僵尸头像" 
+                             class="w-full h-auto rounded-md mb-4 opacity-70">
+                        <p class="text-sm text-gray-500 italic">最终作品：僵尸头像</p>
+                    </div>
+                </div>
+                
+                <!-- 初稿2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">变形金刚设计草图</h3>
+                        <p class="text-gray-600 mb-4">为了画好变形金刚，我参考了一些电影海报和玩具模型，先画出基本结构，再添加机械细节。</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">参考</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">结构</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">机械</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">线条</span>
+                        </div>
+                        <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/28b7c4a8a0c94522b8f671ba3c61824e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020164&x-signature=oFprc%2BVxBX%2F1yZgmg65XRUNSkb0%3D" 
+                             alt="变形金刚" 
+                             class="w-full h-auto rounded-md mb-4 opacity-70">
+                        <p class="text-sm text-gray-500 italic">最终作品：变形金刚</p>
+                    </div>
+                </div>
+                
+                <!-- 初稿3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover-scale" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">数字方块创意构思</h3>
+                        <p class="text-gray-600 mb-4">这个作品的灵感来自于数字艺术和几何图形。我尝试了多种排列方式，最终选择了这种阶梯式的布局。</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">灵感</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">排列</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">平衡</span>
+                            <span class="px-2 py-1 bg-gray-200 rounded text-xs">简约</span>
+                        </div>
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/905d8e828a754683b42ce0421c83f42c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020173&x-signature=1MqHIcUJeDy3LQk8NCjcTs%2Fq7%2BU%3D" 
+                             alt="数字方块" 
+                             class="w-full h-auto rounded-md mb-4 opacity-70">
+                        <p class="text-sm text-gray-500 italic">最终作品：数字方块</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频板块 -->
+    <section id="videos" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up">绘画视频</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                这里展示了我的绘画过程视频，记录了从起稿到完成的全过程。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 视频1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-primary bg-opacity-80 flex items-center justify-center cursor-pointer video-play-button" data-video="zombie">
+                                <i class="fa fa-play text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3cb06a1cdb5f4764b720d0831a7241e4~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020166&x-signature=dcwlkFiMiJNOeOkLqRrmPJC%2FyI0%3D" 
+                             alt="僵尸头像绘画过程" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-2">僵尸头像绘画过程</h3>
+                        <p class="text-gray-600 text-sm">时长：5分30秒 | 2023年</p>
+                    </div>
+                </div>
+                
+                <!-- 视频2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-primary bg-opacity-80 flex items-center justify-center cursor-pointer video-play-button" data-video="robot">
+                                <i class="fa fa-play text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/28b7c4a8a0c94522b8f671ba3c61824e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020164&x-signature=oFprc%2BVxBX%2F1yZgmg65XRUNSkb0%3D" 
+                             alt="变形金刚绘画过程" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-2">变形金刚绘画过程</h3>
+                        <p class="text-gray-600 text-sm">时长：8分15秒 | 2023年</p>
+                    </div>
+                </div>
+                
+                <!-- 视频3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover-scale" data-aos="fade-up" data-aos-delay="300">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-primary bg-opacity-80 flex items-center justify-center cursor-pointer video-play-button" data-video="city">
+                                <i class="fa fa-play text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/8076978390b54135a14e2c5094036bf5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020169&x-signature=bW2Xoo8jHKyae56tmN%2Fkn3WqJ7g%3D" 
+                             alt="科幻城市绘画过程" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-2">科幻城市绘画过程</h3>
+                        <p class="text-gray-600 text-sm">时长：6分40秒 | 2023年</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 留言板 -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up">留言板</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                欢迎留下您的评论和建议，我会认真阅读每一条留言！
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 留言表单 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md" data-aos="fade-right">
+                        <h3 class="text-xl font-semibold mb-4">发送留言</h3>
+                        <form id="message-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">邮箱（选填）</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">留言内容</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
+                            </div>
+                            <button type="submit" class="metal-button w-full py-3 rounded-lg text-white font-medium">
+                                发送留言
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- 最新留言 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md" data-aos="fade-left">
+                        <h3 class="text-xl font-semibold mb-4">最新留言</h3>
+                        <div id="recent-messages">
+                            <!-- 留言1 -->
+                            <div class="mb-4 pb-4 border-b border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium">小明</span>
+                                    <span class="text-sm text-gray-500">2023-06-15</span>
+                                </div>
+                                <p class="text-gray-600">你的僵尸头像画得真酷！能分享一下绘画技巧吗？</p>
+                            </div>
+                            
+                            <!-- 留言2 -->
+                            <div class="mb-4 pb-4 border-b border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium">美术老师</span>
+                                    <span class="text-sm text-gray-500">2023-06-10</span>
+                                </div>
+                                <p class="text-gray-600">作为你的美术老师，我很欣赏你的创造力和绘画技巧。继续努力！</p>
+                            </div>
+                            
+                            <!-- 留言3 -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium">小红</span>
+                                    <span class="text-sm text-gray-500">2023-06-05</span>
+                                </div>
+                                <p class="text-gray-600">我也喜欢画简笔画，希望能和你交流一下绘画心得！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">黑白画境</h3>
+                    <p class="text-gray-400">用铅笔勾勒世界，以黑白诠释创意</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-weixin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-weibo text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-qq text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 黑白画境 - Yong画师作品集. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 作品详情模态框 -->
+    <div id="work-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold"></h3>
+                    <button id="close-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="mb-6">
+                    <img id="modal-image" src="" alt="" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="mb-6">
+                    <p id="modal-description" class="text-gray-700"></p>
+                </div>
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-3">作品信息</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-500">创作时间</p>
+                            <p id="modal-date" class="font-medium"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">创作工具</p>
+                            <p id="modal-tools" class="font-medium"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">作品类型</p>
+                            <p id="modal-type" class="font-medium"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">作品尺寸</p>
+                            <p id="modal-size" class="font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品留言区 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">作品留言</h4>
+                    <div id="work-comments" class="mb-6">
+                        <!-- 留言将动态添加 -->
+                    </div>
+                    <form id="comment-form">
+                        <div class="mb-4">
+                            <label for="comment-name" class="block text-gray-700 mb-2">姓名</label>
+                            <input type="text" id="comment-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="comment-content" class="block text-gray-700 mb-2">留言内容</label>
+                            <textarea id="comment-content" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
+                        </div>
+                        <button type="submit" class="metal-button px-6 py-2 rounded-lg text-white font-medium">
+                            提交留言
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频播放模态框 -->
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg max-w-4xl w-full">
+            <div class="p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="video-modal-title" class="text-xl font-bold"></h3>
+                    <button id="close-video-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="aspect-w-16 aspect-h-9 bg-gray-900 rounded-lg overflow-hidden">
+                    <div id="video-placeholder" class="w-full h-full flex items-center justify-center">
+                        <p class="text-white text-lg">视频播放功能模拟</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化AOS动画库
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // 移动端菜单切换
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 如果是移动端，点击后关闭菜单
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+            
+            // 作品数据
+            const worksData = [
+                {
+                    id: 1,
+                    title: '僵尸头像',
+                    image: 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3cb06a1cdb5f4764b720d0831a7241e4~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020166&x-signature=dcwlkFiMiJNOeOkLqRrmPJC%2FyI0%3D',
+                    description: '这是我创作的僵尸头像铅笔画，灵感来源于恐怖电影中的经典形象。我尝试通过黑白对比和阴影表现出僵尸的阴森感和立体感。',
+                    date: '2023年6月10日',
+                    tools: '2B铅笔、素描纸、橡皮',
+                    type: '铅笔画',
+                    size: 'A4',
+                    comments: [
+                        {
+                            name: '小明',
+                            date: '2023-06-15',
+                            content: '这个僵尸头像太酷了！眼睛的刻画很有特色。'
+                        },
+                        {
+                            name: '小红',
+                            date: '2023-06-12',
+                            content: '我也想学习怎么画这种风格的作品。'
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: '数字方块',
+                    image: 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/905d8e828a754683b42ce0421c83f42c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020173&x-signature=1MqHIcUJeDy3LQk8NCjcTs%2Fq7%2BU%3D',
+                    description: '这是一幅数字方块的简笔画作品，我尝试通过不同的排列方式创造出有趣的视觉效果。数字是我们生活中最常见的符号之一，通过艺术化的排列可以产生意想不到的美感。',
+                    date: '2023年5月28日',
+                    tools: 'HB铅笔、白纸',
+                    type: '简笔画',
+                    size: 'A4',
+                    comments: [
+                        {
+                            name: '美术老师',
+                            date: '2023-06-01',
+                            content: '很有创意的作品！简单的数字通过巧妙的排列变得很有趣。'
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: '变形金刚',
+                    image: 'https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/28b7c4a8a0c94522b8f671ba3c61824e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020164&x-signature=oFprc%2BVxBX%2F1yZgmg65XRUNSkb0%3D',
+                    description: '作为一个变形金刚迷，我尝试用铅笔画出了这个经典角色。我特别注重机械结构的细节表现，希望能够还原出变形金刚的金属质感和力量感。',
+                    date: '2023年6月5日',
+                    tools: '2B铅笔、4B铅笔、素描纸',
+                    type: '铅笔画',
+                    size: 'A3',
+                    comments: [
+                        {
+                            name: '小强',
+                            date: '2023-06-08',
+                            content: '变形金刚画得真像！机械细节很到位。'
+                        },
+                        {
+                            name: '爸爸',
+                            date: '2023-06-06',
+                            content: '我也喜欢变形金刚，你的画工进步很大！'
+                        }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: '科幻城市',
+                    image: 'https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/8076978390b54135a14e2c5094036bf5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020169&x-signature=bW2Xoo8jHKyae56tmN%2Fkn3WqJ7g%3D',
+                    description: '这幅科幻城市的简笔画展现了我对未来城市的想象。高耸的建筑、飞行的汽车和外星飞船，构成了一个充满科技感的未来世界。',
+                    date: '2023年5月20日',
+                    tools: 'HB铅笔、白纸',
+                    type: '简笔画',
+                    size: 'A4',
+                    comments: [
+                        {
+                            name: '小华',
+                            date: '2023-05-25',
+                            content: '未来城市的构想很有趣，特别是那个飞碟！'
+                        }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: '骷髅头',
+                    image: 'https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/bcb19d26fd8f41bea2209c72e0fc9c61~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020167&x-signature=71fmXHUleHLerQEUMBEjJkXe7MA%3D',
+                    description: '这是一幅骷髅头的铅笔画，我尝试通过明暗对比和细节刻画，表现出骷髅头的立体感和质感。骷髅是很多艺术家喜欢的创作主题，因为它能够很好地练习素描技巧。',
+                    date: '2023年6月2日',
+                    tools: '2B铅笔、4B铅笔、素描纸',
+                    type: '铅笔画',
+                    size: 'A4',
+                    comments: [
+                        {
+                            name: '小美',
+                            date: '2023-06-04',
+                            content: '骷髅头的细节画得很仔细，阴影处理得很好。'
+                        },
+                        {
+                            name: '老师',
+                            date: '2023-06-03',
+                            content: '结构感很强，继续保持！'
+                        }
+                    ]
+                },
+                {
+                    id: 6,
+                    title: '机器人手',
+                    image: 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/2fe92b12ad75466b92e0124df070b457~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260522133531BD5882327BE2A648B124&rrcfp=f06b921b&x-expires=1782020164&x-signature=JB3Wm2AaRvEbUh1vWhZWTj8rgY4%3D',
+                    description: '这幅机器人手的简笔画展示了机械结构的美感。我特别关注了关节和连接部分的设计，希望能够创造出一个既美观又实用的机械手臂。',
+                    date: '2023年5月15日',
+                    tools: 'HB铅笔、白纸',
+                    type: '简笔画',
+                    size: 'A4',
+                    comments: [
+                        {
+                            name: '小李',
+                            date: '2023-05-18',
+                            content: '机器人手的关节设计很巧妙！'
+                        }
+                    ]
+                }
+            ];
+            
+            // 作品详情模态框
+            const workModal = document.getElementById('work-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalImage = document.getElementById('modal-image');
+            const modalDescription = document.getElementById('modal-description');
+            const modalDate = document.getElementById('modal-date');
+            const modalTools = document.getElementById('modal-tools');
+            const modalType = document.getElementById('modal-type');
+            const modalSize = document.getElementById('modal-size');
+            const workComments = document.getElementById('work-comments');
+            const closeModal = document.getElementById('close-modal');
+            const commentForm = document.getElementById('comment-form');
+            
+            // 打开作品详情
+            function openWorkDetails(workId) {
+                const work = worksData.find(w => w.id === workId);
+                
+                if (work) {
+                    modalTitle.textContent = work.title;
+                    modalImage.src = work.image;
+                    modalImage.alt = work.title;
+                    modalDescription.textContent = work.description;
+                    modalDate.textContent = work.date;
+                    modalTools.textContent = work.tools;
+                    modalType.textContent = work.type;
+                    modalSize.textContent = work.size;
+                    
+                    // 渲染评论
+                    workComments.innerHTML = '';
+                    if (work.comments && work.comments.length > 0) {
+                        work.comments.forEach(comment => {
+                            const commentElement = document.createElement('div');
+                            commentElement.className = 'mb-4 pb-4 border-b border-gray-200';
+                            commentElement.innerHTML = `
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium">${comment.name}</span>
+                                    <span class="text-sm text-gray-500">${comment.date}</span>
+                                </div>
+                                <p class="text-gray-600">${comment.content}</p>
+                            `;
+                            workComments.appendChild(commentElement);
+                        });
+                    } else {
+                        workComments.innerHTML = '<p class="text-gray-500">暂无留言，快来发表第一条吧！</p>';
+                    }
+                    
+                    // 存储当前作品ID到表单
+                    commentForm.dataset.workId = workId;
+                    
+                    // 显示模态框
+                    workModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            // 关闭模态框
+            function closeWorkModal() {
+                workModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // 绑定查看详情按钮
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const workId = parseInt(this.dataset.id);
+                    openWorkDetails(workId);
+                });
+            });
+            
+            // 绑定作品图片点击
+            document.querySelectorAll('.work-image').forEach(image => {
+                image.addEventListener('click', function() {
+                    const workId = parseInt(this.dataset.id);
+                    openWorkDetails(workId);
+                });
+            });
+            
+            // 绑定关闭按钮
+            closeModal.addEventListener('click', closeWorkModal);
+            
+            // 点击模态框外部关闭
+            workModal.addEventListener('click', function(e) {
+                if (e.target === workModal) {
+                    closeWorkModal();
+                }
+            });
+            
+            // 提交作品评论
+            commentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const workId = parseInt(this.dataset.workId);
+                const name = document.getElementById('comment-name').value;
+                const content = document.getElementById('comment-content').value;
+                
+                if (name && content) {
+                    // 找到对应的作品
+                    const work = worksData.find(w => w.id === workId);
+                    
+                    if (work) {
+                        // 添加新评论
+                        const newComment = {
+                            name: name,
+                            date: new Date().toISOString().split('T')[0],
+                            content: content
+                        };
+                        
+                        if (!work.comments) {
+                            work.comments = [];
+                        }
+                        
+                        work.comments.push(newComment);
+                        
+                        // 重新渲染评论
+                        const commentElement = document.createElement('div');
+                        commentElement.className = 'mb-4 pb-4 border-b border-gray-200';
+                        commentElement.innerHTML = `
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">${newComment.name}</span>
+                                <span class="text-sm text-gray-500">${newComment.date}</span>
+                            </div>
+                            <p class="text-gray-600">${newComment.content}</p>
+                        `;
+                        
+                        // 清空评论区并重新添加所有评论
+                        workComments.innerHTML = '';
+                        work.comments.forEach(comment => {
+                            const commentEl = document.createElement('div');
+                            commentEl.className = 'mb-4 pb-4 border-b border-gray-200';
+                            commentEl.innerHTML = `
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium">${comment.name}</span>
+                                    <span class="text-sm text-gray-500">${comment.date}</span>
+                                </div>
+                                <p class="text-gray-600">${comment.content}</p>
+                            `;
+                            workComments.appendChild(commentEl);
+                        });
+                        
+                        // 清空表单
+                        document.getElementById('comment-name').value = '';
+                        document.getElementById('comment-content').value = '';
+                        
+                        // 显示成功提示
+                        alert('留言提交成功！');
+                    }
+                }
+            });
+            
+            // 作品分类筛选
+            document.querySelectorAll('.category-filter').forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // 更新按钮样式
+                    document.querySelectorAll('.category-filter').forEach(btn => {
+                        btn.classList.remove('active', 'bg-primary', 'text-white', 'metal-button');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    
+                    this.classList.add('active', 'bg-primary', 'text-white', 'metal-button');
+                    this.classList.remove('bg-gray-200', 'text-gray-700');
+                    
+                    // 筛选作品
+                    document.querySelectorAll('.masonry-item').forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 视频播放模态框
+            const videoModal = document.getElementById('video-modal');
+            const videoModalTitle = document.getElementById('video-modal-title');
+            const closeVideoModal = document.getElementById('close-video-modal');
+            
+            // 打开视频模态框
+            document.querySelectorAll('.video-play-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const videoType = this.dataset.video;
+                    let title = '';
+                    
+                    switch (videoType) {
+                        case 'zombie':
+                            title = '僵尸头像绘画过程';
+                            break;
+                        case 'robot':
+                            title = '变形金刚绘画过程';
+                            break;
+                        case 'city':
+                            title = '科幻城市绘画过程';
+                            break;
+                        default:
+                            title = '绘画过程';
+                    }
+                    
+                    videoModalTitle.textContent = title;
+                    videoModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // 关闭视频模态框
+            function closeVideoModalFunc() {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeVideoModal.addEventListener('click', closeVideoModalFunc);
+            
+            // 点击视频模态框外部关闭
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    closeVideoModalFunc();
+                }
+            });
+            
+            // 全局留言表单提交
+            document.getElementById('message-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && message) {
+                    // 创建新留言元素
+                    const newMessage = document.createElement('div');
+                    newMessage.className = 'mb-4 pb-4 border-b border-gray-200';
+                    newMessage.innerHTML = `
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium">${name}</span>
+                            <span class="text-sm text-gray-500">${new Date().toISOString().split('T')[0]}</span>
+                        </div>
+                        <p class="text-gray-600">${message}</p>
+                    `;
+                    
+                    // 添加到留言列表顶部
+                    const recentMessages = document.getElementById('recent-messages');
+                    recentMessages.insertBefore(newMessage, recentMessages.firstChild);
+                    
+                    // 清空表单
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('message').value = '';
+                    
+                    // 显示成功提示
+                    alert('留言提交成功！');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
